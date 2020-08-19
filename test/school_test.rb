@@ -81,6 +81,14 @@ class SchoolTest < Minitest::Test
   def test_12_hour_format_works
     school = School.new('9:00', 7)
 
+    assert_equal "16:00", school.end_time
     assert_equal "4:00", school.convert_end_time_to_clock_time
+  end
+
+  def test_pre_noon_end_time_wont_convert
+    school = School.new('8:00', 3)
+
+    assert_equal "11:00", school.end_time
+    assert_equal "11:00", school.convert_end_time_to_clock_time
   end
 end
